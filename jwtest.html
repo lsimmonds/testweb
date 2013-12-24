@@ -52,8 +52,8 @@ complete();
 return false;
 };
  
-complete = function() {
-console.log("executing complete");
+complete = function(called_by) {
+console.log(called_by+": executing complete");
 };
  
 context = {howdy: "cowboy"};
@@ -61,16 +61,16 @@ context = {howdy: "cowboy"};
 RE.subscribe("foozball", handler1, {handlerData: {foo: "bar"}});
 RE.subscribe("foozball", handler2, {handlerData: {bar: "foo"}});
 RE.subscribe("foozball", handler3, {handlerData: {ice: "cream"}});
-RE.trigger("foozball", complete, {bat: "man"});
+RE.trigger("foozball", complete("foozball"), {bat: "man"});
  
-RE.trigger("barbell", complete, {candy: "cane"});
+RE.trigger("barbell", complete("barbell"), {candy: "cane"});
 RE.subscribe("barbell", handler2, {handlerData: {snake: "venom"}});
  
 RE.subscribe("dumbell", handler5, {handlerData: {big: "weights"}, handlerContext: context});
 RE.subscribe("dumbell", handler4, {handlerData: {big: "weights"}, handlerContext: context});
-RE.trigger("dumbell", complete, {candy: "sugar"});
+RE.trigger("dumbell", complete("dumbell"), {candy: "sugar"});
  
-RE.trigger("yellow", complete, {snow: "flour"});
+RE.trigger("yellow", complete("yellow"), {snow: "flour"});
 RE.subscribe("yellow", handler1, {handlerData: {pig: "skin"}, executeHandlerEvenIfEventHasBeenTriggered: false});
 RE.subscribe("yellow", handler3, {handlerData: {flower: "power"}, executeHandlerEvenIfEventHasBeenTriggered: false});
 </script>
